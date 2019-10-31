@@ -4,7 +4,7 @@ const port = 3000
 var fs = require('fs');
  
 
-
+//read directory
 app.get('/api/cd', async (req, res) => {
     var returnInfo = {};
     var numOfItems = 0;
