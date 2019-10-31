@@ -3,12 +3,21 @@ const app = express()
 const port = 3000
 var fs = require('fs');
  
-
+app.put('/api/mkdir', (req, res) => {
+    var path = req.query.path;
+    if (path == null ) res.send("No path specified in query.");
+    var name = req.query.name;
+    if (path == null ) res.send("No name specified in query.");
+    
+})
 //read directory
 app.get('/api/cd', async (req, res) => {
     var returnInfo = {};
     var numOfItems = 0;
     var path;
+
+    req.query.wd, req.query.filename, req.query.newFileName
+
     if (req.query.path == null) {
         res.send("No path provided in query.")
     } else {
@@ -30,6 +39,7 @@ app.get('/api/cd', async (req, res) => {
                 }
             });
         }
+
     });
 })
 
