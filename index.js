@@ -9,15 +9,16 @@ app.get('/api/cd', async (req, res) => {
     var returnInfo = {};
     var numOfItems = 0;
     var path;
-    if (res.path == null) {
-        path = "/home/ben"
+    if (req.query.path == null) {
+        path = "/home/ben/"
         console.log(
             "Not Working yet"
         )
     } else {
-        path = req.params.path;
+        path = req.query.path;
     }
     fs.readdir(path, async function(err, items) {
+        console.log(items)
         for (const item of items) {
     
             await fs.stat(path + "/" + item, async function(err, stats) {
