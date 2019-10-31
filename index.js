@@ -22,16 +22,14 @@ app.get('/api/cd', async (req, res) => {
                 numOfItems++
                 returnInfo[item] = {
                     size:stats["size"],
-                    isDirectory:stats.isFile(),
+                    isDirectory:stats.isDirectory(),
                     permissions:stats["mode"],
                 }
                 if (numOfItems == items.length) {
                     res.send(await returnInfo) 
                 }
-               
             });
         }
-          
     });
 })
 
