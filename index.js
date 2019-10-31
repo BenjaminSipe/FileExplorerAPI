@@ -10,10 +10,7 @@ app.get('/api/cd', async (req, res) => {
     var numOfItems = 0;
     var path;
     if (req.query.path == null) {
-        path = "/home/ben/"
-        console.log(
-            "Not Working yet"
-        )
+        res.send("No path provided in query.")
     } else {
         path = req.query.path;
     }
