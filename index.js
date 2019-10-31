@@ -5,10 +5,18 @@ var fs = require('fs');
  
 
 
-app.get('/', async (req, res) => {
+app.get('/api/cd', async (req, res) => {
     var returnInfo = {};
     var numOfItems = 0;
-    var path = "/home/ben"
+    var path;
+    if (res.path == null) {
+        path = "/home/ben"
+        console.log(
+            "Not Working yet"
+        )
+    } else {
+        path = req.params.path;
+    }
     fs.readdir(path, async function(err, items) {
         for (const item of items) {
     
