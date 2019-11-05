@@ -10,6 +10,10 @@ app.put('/api/mkdir', (req, res) => {
     if (path == null ) res.send("No name specified in query.");
     
 })
+
+app.all('/api', (req, res) => {
+    res.send("TEST RESPONSE")
+})
 //read directory
 app.get('/api/cd', async (req, res) => {
     var returnInfo = {};
