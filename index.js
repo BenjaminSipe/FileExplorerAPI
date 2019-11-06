@@ -15,8 +15,8 @@ app.all('/api', (req, res) => {
     res.send("TEST RESPONSE")
 })
 //read directory
-app.get('/api/cd', async (req, res) => {
-    var returnInfo = {};
+app.get('/api/ls', async (req, res) => {
+    var returnInfo = [];
     var numOfItems = 0;
     var path;
 
@@ -28,18 +28,19 @@ app.get('/api/cd', async (req, res) => {
         path = req.query.path;
     }
     fs.readdir(path, async function(err, items) {
-        console.log(items)
+        // console.log(items)
         for (const item of items) {
     
             await fs.stat(path + "/" + item, async function(err, stats) {
                 numOfItems++
-                returnInfo[item] = {
+                returnInfo.push({
+                    name:item,
                     size:stats["size"],
                     isDirectory:stats.isDirectory(),
                     permissions:stats["mode"],
-                }
+                })
                 if (numOfItems == items.length) {
-                    res.send(await returnInfo) 
+                    res.send(JSON.stringify(await returnInfo)) 
                 }
             });
         }
