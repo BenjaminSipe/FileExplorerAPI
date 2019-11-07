@@ -7,8 +7,27 @@ app.put('/api/mkdir', (req, res) => {
     var path = req.query.path;
     if (path == null ) res.send("No path specified in query.");
     var name = req.query.name;
-    if (path == null ) res.send("No name specified in query.");
-    
+    if (name == null ) res.send("No name specified in query.");
+    fs.mkdir(path+"/"+name,(err) => {
+        if (err) res.send(err);
+        else res.send("success")
+    });
+})
+
+app.put('/api/mkfile', (req, res) => {
+    console.log(req.query)
+    var path = req.query.path;
+    if (path == null ) res.send("No path specified in query.");
+    var name = req.query.name;
+    if (name == null ) res.send("No name specified in query.");
+    fs.open(path+"/"+name,"wx",(err, fd) => {
+        if (err) res.send(err);
+        else {
+            fs.close(fd, (err) => {
+                if (err) console.log(err)
+                res.send("success")
+            })
+        }});
 })
 
 app.all('/api', (req, res) => {
@@ -19,8 +38,6 @@ app.get('/api/ls', async (req, res) => {
     var returnInfo = [];
     var numOfItems = 0;
     var path;
-
-    req.query.wd, req.query.filename, req.query.newFileName
 
     if (req.query.path == null) {
         res.send("No path provided in query.")
